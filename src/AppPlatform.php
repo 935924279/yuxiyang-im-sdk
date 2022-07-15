@@ -22,9 +22,9 @@ class AppPlatform
         return self::invokeClass(User::class, ['host' => $this->host]);
     }
 
-    public function app()
+    public function app($token)
     {
-        return self::invokeClass(User::class, ['host' => $this->host]);
+        return self::invokeClass(Application::class, ['token' => $token, 'host' => $this->host]);
     }
 
     /**

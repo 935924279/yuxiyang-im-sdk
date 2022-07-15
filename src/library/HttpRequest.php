@@ -3,6 +3,8 @@
 namespace Lanyue\ImSdk\library;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+
 class HttpRequest
 {
     public static $client;
@@ -25,17 +27,28 @@ class HttpRequest
     }
 
 
-    public static function post(string $uri,array $params,$headers=[]){
-        $options['body'] = $params;
-        $header = [ 'Accept'     => 'application/json'];
-        if($headers){
-            $header = array_merge($header,$headers);
+    public static function post(string $uri,array $params,$headers=[])
+    {
+        $options['json'] = $params;
+        $header = ['Accept' => 'application/json'];
+        if ($headers) {
+            $header = array_merge($header, $headers);
         }
         $options['headers'] = $header;
-        $result = (new Client())->request('POST', $uri, $options);
-        return [
-            'httpCode'=>$result->getstatuscode(),
-            'body' => $result->getBody()->getContents()
-        ];
+        try {
+            $result = (new Client())->request('POST', $uri, $options);
+            $content = $result->getBody()->getContents();
+            var_dump($content);
+            var_dump(json_decode($content, true));
+            return [
+                'httpCode' => $result->getstatuscode(),
+                'body' => json_decode($content, true)
+            ];
+
+        } catch (GuzzleException $e) {
+            throw new \Exception($e->getMessage());
+        }
+
+
     }
 }

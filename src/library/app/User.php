@@ -8,7 +8,6 @@ class User
 {
 
     public $host;
-    public $Authorization;
     public $url ;
 
     public $registerUrl='/user/register';
