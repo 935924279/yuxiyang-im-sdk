@@ -17,10 +17,10 @@ class HttpRequest
         if($headers){
             $options['headers'] = $headers;
         }
-        $result =   self::$client->request('GET',$uri,$options);
+        $result = (new Client())->request('GET', $uri, $options);
         return [
             'httpCode'=>$result->getstatuscode(),
-            'body'=>$result->getBody()
+            'body' => $result->getBody()->getContents()
         ];
     }
 
@@ -32,10 +32,10 @@ class HttpRequest
             $header = array_merge($header,$headers);
         }
         $options['headers'] = $header;
-        $result =   self::$client->request('POST',$uri,$options);
+        $result = (new Client())->request('POST', $uri, $options);
         return [
             'httpCode'=>$result->getstatuscode(),
-            'body'=>$result->getBody()
+            'body' => $result->getBody()->getContents()
         ];
     }
 }

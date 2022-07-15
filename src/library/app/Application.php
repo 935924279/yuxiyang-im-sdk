@@ -13,9 +13,9 @@ class Application
     public $userApps = '/app/userApps';
 
 
-    public function __construct($token,$host,$port=80)
+    public function __construct($token, $host)
     {
-        $this->host = $host.':'.$port;
+        $this->host = $host;
         $this->authorization = $token;
     }
 

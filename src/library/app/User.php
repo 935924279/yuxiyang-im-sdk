@@ -13,9 +13,9 @@ class User
 
     public $registerUrl='/user/register';
     public $loginUrl = '/user/login';
-    public function __construct($host,$port=80)
+    public function __construct($host)
     {
-        $this->host = $host.':'.$port;
+        $this->host = $host;
     }
 
 
