@@ -1,0 +1,26 @@
+{
+    "name": "lanyue/yuxiyang-im-sdk",
+    "type": "library",
+    "description": "这是一个测试composer im ",
+    "require-dev": {
+        "php": ">=7.0",
+        "guzzlehttp/guzzle": "*"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Lanyue\\ImSdk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "余西阳",
+            "email": "935924279@qq.com",
+            "homepage": "https://github.com/935924279"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "guzzlehttp/guzzle": "*"
+    }
+}
