@@ -86,7 +86,7 @@ class Friend
      * @param int $size
      * @return false|mixed|string
      */
-    public function getChatHistory(int $friend_group_id, string $uniqued, int $page = 1, int $size = 10)
+    public function getChatHistory(int $friend_group_id, string $uniqued='', int $page = 1, int $size = 10)
     {
         $param['uniqueid'] = $uniqued;
         $param['friend_group_id'] = $friend_group_id;
