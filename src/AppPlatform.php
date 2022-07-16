@@ -6,6 +6,8 @@ use Lanyue\ImSdk\library\app\Application;
 use Lanyue\ImSdk\library\app\User;
 use Lanyue\ImSdk\library\im\Friend;
 use Lanyue\ImSdk\library\im\Group;
+use ReflectionClass;
+use ReflectionException;
 
 class AppPlatform
 {
@@ -24,40 +26,48 @@ class AppPlatform
         return self::invokeClass(User::class, ['host' => $this->host]);
     }
 
-    public function app($token)
+    public function app(string $email,string $password)
     {
-        return self::invokeClass(Application::class, ['token' => $token, 'host' => $this->host]);
+        return self::invokeClass(Application::class, ['email' => $email, 'password'=>$password,'host' => $this->host]);
     }
 
 
-    public function friend($appid)
+    public function friend(string $appid)
     {
         return self::invokeClass(Friend::class,['appid'=>$appid,'host'=>$this->host]);
     }
 
-    public function group($appid)
+    public function group(string $appid)
     {
         return self::invokeClass(Group::class,['appid'=>$appid,'host'=>$this->host]);
     }
 
-    public function imUser($appid)
+    public function imUser(string $appid)
     {
-        return self::invokeClass(\Lanyue\ImSdk\library\im\User::class,['appid'=>$appid,'host'=>$this->host]);
+        return self::invokeClass(library\im\User::class,['appid'=>$appid,'host'=>$this->host]);
     }
+
     /**
      * 调用反射执行类的方法 支持参数绑定
      * @access public
-     * @param string|array $method 方法
+     * @param $class
      * @param array $vars 变量
      * @return mixed
+     * @throws ReflectionException
      */
-    public static function invokeClass($class, $vars = [])
+    public static function invokeClass($class, array $vars = [])
     {
-        $reflect = new \ReflectionClass($class);
+        try {
+            $reflect = new ReflectionClass($class);
+        } catch (ReflectionException $e) {
+        }
 
         $constructor = $reflect->getConstructor();
         if($constructor){
-            return $reflect->newInstanceArgs($vars);
+            try {
+                return $reflect->newInstanceArgs($vars);
+            } catch (ReflectionException $e) {
+            }
         }
         return $reflect;
     }

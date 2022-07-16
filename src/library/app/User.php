@@ -2,6 +2,7 @@
 
 namespace Lanyue\ImSdk\library\app;
 
+use Exception;
 use Lanyue\ImSdk\library\HttpRequest;
 
 class User
@@ -25,7 +26,11 @@ class User
             'email'=>$email,
             'password'=>$password
         ];
-        return HttpRequest::post($request_url,$data);
+        try {
+            return HttpRequest::post($request_url, $data);
+        } catch (Exception $e) {
+            return json_encode(['msg'=>$e->getMessage(),'code'=>$e->getCode()]);
+        }
     }
 
 
@@ -37,6 +42,10 @@ class User
             'email'=>$email,
             'password'=>$password
         ];
-        return HttpRequest::post($request_url,$data);
+        try {
+            return HttpRequest::post($request_url, $data);
+        } catch (Exception $e) {
+            return json_encode(['msg'=>$e->getMessage(),'code'=>$e->getCode()]);
+        }
     }
 }

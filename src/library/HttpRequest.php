@@ -2,6 +2,7 @@
 
 namespace Lanyue\ImSdk\library;
 
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -14,20 +15,28 @@ class HttpRequest
         self::$client = new Client();
     }
 
-    public static function get(string $uri,array $params,$headers=[]){
+    /**
+     * @throws Exception
+     */
+    public static function get(string $uri, array $params, $headers=[]){
         $options['query'] = $params;
         if($headers){
             $options['headers'] = $headers;
         }
-        $result = (new Client())->request('GET', $uri, $options);
-        return [
-            'httpCode'=>$result->getstatuscode(),
-            'body' => $result->getBody()->getContents()
-        ];
+        try {
+            $result = (new Client())->request('GET', $uri, $options);
+            $content = $result->getBody()->getContents();
+            return json_decode($content, true);
+        }catch (GuzzleException $e) {
+            return json_encode(['msg'=>$e->getMessage(),'code'=>$e->getCode()]);
+        }
     }
 
 
-    public static function post(string $uri,array $params,$headers=[])
+    /**
+     * @throws Exception
+     */
+    public static function post(string $uri, array $params, $headers=[])
     {
         $options['json'] = $params;
         $header = ['Accept' => 'application/json'];
@@ -38,15 +47,9 @@ class HttpRequest
         try {
             $result = (new Client())->request('POST', $uri, $options);
             $content = $result->getBody()->getContents();
-            var_dump($content);
-            var_dump(json_decode($content, true));
-            return [
-                'httpCode' => $result->getstatuscode(),
-                'body' => json_decode($content, true)
-            ];
-
+            return json_decode($content, true);
         } catch (GuzzleException $e) {
-            throw new \Exception($e->getMessage());
+            return json_encode(['msg'=>$e->getMessage(),'code'=>$e->getCode()]);
         }
 
 

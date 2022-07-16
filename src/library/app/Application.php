@@ -2,6 +2,7 @@
 
 namespace Lanyue\ImSdk\library\app;
 
+use Exception;
 use Lanyue\ImSdk\library\HttpRequest;
 
 class Application
@@ -13,12 +14,10 @@ class Application
     public $userApps = '/app/userApps';
 
 
-    public function __construct($token, $host, $email, $password)
+    public function __construct( $email, $password,$host)
     {
         $this->host = $host;
-        $this->authorization = $token;
-        $token = $this->initUser($email, $password);
-        $this->authorization = $token;
+        $this->authorization =  $this->initUser($email, $password);
     }
 
     public function initUser($email, $password)
@@ -33,7 +32,7 @@ class Application
         }
     }
 
-    public function createApp($appName, $appDes, $appType = 'personal')
+    public function createApp(string $appName, string $appDes, $appType = 'personal')
     {
         $url = $this->host . $this->createApp;
         $params = [
@@ -44,7 +43,11 @@ class Application
         $headers = [
             "Authorization" => "Bearer " . $this->authorization
         ];
-        return HttpRequest::post($url, $params, $headers);
+        try {
+            return HttpRequest::post($url, $params, $headers);
+        } catch (Exception $e) {
+            return json_encode(['msg'=>$e->getMessage(),'code'=>$e->getCode()]);
+        }
     }
 
     public function getApp()
@@ -53,6 +56,11 @@ class Application
         $headers = [
             "Authorization" => "Bearer " . $this->authorization
         ];
-        return HttpRequest::post($url, [], $headers);
+        try {
+            return HttpRequest::post($url, [], $headers);
+        } catch (Exception $e) {
+            return json_encode(['msg'=>$e->getMessage(),'code'=>$e->getCode()]);
+
+        }
     }
 }
