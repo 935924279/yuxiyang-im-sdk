@@ -23,28 +23,34 @@ class AppPlatform
 
     public function appuser()
     {
-        return self::invokeClass(User::class, ['host' => $this->host]);
+        return new User($this->host);
+        //return self::invokeClass(User::class, ['host' => $this->host]);
     }
 
     public function app(string $email,string $password)
     {
-        return self::invokeClass(Application::class, ['email' => $email, 'password'=>$password,'host' => $this->host]);
+        return new Application($email,$password,$this->host);
+        // return self::invokeClass(Application::class, ['email' => $email, 'password'=>$password,'host' => $this->host]);
     }
 
 
     public function friend(string $appid)
     {
-        return self::invokeClass(Friend::class,['appid'=>$appid,'host'=>$this->host]);
+        return new Friend($appid,$this->host);
+
+        // return self::invokeClass(Friend::class,['appid'=>$appid,'host'=>$this->host]);
     }
 
     public function group(string $appid)
     {
-        return self::invokeClass(Group::class,['appid'=>$appid,'host'=>$this->host]);
+        return new Group($appid,$this->host);
+        // return self::invokeClass(Group::class,['appid'=>$appid,'host'=>$this->host]);
     }
 
     public function imUser(string $appid)
     {
-        return self::invokeClass(library\im\User::class,['appid'=>$appid,'host'=>$this->host]);
+        return new library\im\User($appid,$this->host);
+        //return self::invokeClass(library\im\User::class,['appid'=>$appid,'host'=>$this->host]);
     }
 
     /**
