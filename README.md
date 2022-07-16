@@ -5,9 +5,7 @@
   `composer require lanyue/yuxiyang-im-sdk`
 ## 简介
 <font size=4 >此sdk对应的是一个聊天平台，分为平台端,im端，im分为api,和websocket</font>
-
-
-##请求示例
+## 请求示例
 ### 平台端
 #### 应用
    ```
