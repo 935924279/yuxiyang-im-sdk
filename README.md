@@ -8,7 +8,7 @@
 ## 请求示例
 ### 平台端
 #### 应用
-   ```
+   ```php
     use Lanyue\ImSdk\AppPlatform;
     $host = "http://127.0.0.1:9501"; //请求地址
     $email = '935924279@qq.com'; //邮箱
@@ -25,7 +25,7 @@
    ```
 ### IM接口
 #### 单聊
-   ```
+   ```php
     use Lanyue\ImSdk\AppPlatform;
     $host = "http://127.0.0.1:9501"; //请求地址
     $platform =  new AppPlatform($host);
@@ -58,7 +58,7 @@
     $platform->friend($appid)->getChatHistory($friend_group_id,$uniqueid,$page,$size);
    ```
 #### 群聊
-   ```
+   ```php
     use Lanyue\ImSdk\AppPlatform;
     $host = "http://127.0.0.1:9501"; //请求地址
     $platform =  new AppPlatform($host);
@@ -127,7 +127,7 @@
     
    ```
 #### 用户 链接websocket时需要token
-   ```
+   ```php
     use Lanyue\ImSdk\AppPlatform;
     $host = "http://127.0.0.1:9501"; //请求地址
     $platform =  new AppPlatform($host);
@@ -142,7 +142,7 @@
     $platform->imUser($appid)->websocket($from_user);
    ```
 ### websocket
-   ```
+   ```php
    //链接
    $token = '';//im->用户 获取的token
    ws://127.0.0.1:9502/?token={$token}
