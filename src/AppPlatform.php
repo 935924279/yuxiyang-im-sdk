@@ -4,6 +4,8 @@ namespace Lanyue\ImSdk;
 
 use Lanyue\ImSdk\library\app\Application;
 use Lanyue\ImSdk\library\app\User;
+use Lanyue\ImSdk\library\im\Friend;
+use Lanyue\ImSdk\library\im\Group;
 
 class AppPlatform
 {
@@ -27,6 +29,21 @@ class AppPlatform
         return self::invokeClass(Application::class, ['token' => $token, 'host' => $this->host]);
     }
 
+
+    public function friend($appid)
+    {
+        return self::invokeClass(Friend::class,['appid'=>$appid,'host'=>$this->host]);
+    }
+
+    public function group($appid)
+    {
+        return self::invokeClass(Group::class,['appid'=>$appid,'host'=>$this->host]);
+    }
+
+    public function imUser($appid)
+    {
+        return self::invokeClass(\Lanyue\ImSdk\library\im\User::class,['appid'=>$appid,'host'=>$this->host]);
+    }
     /**
      * 调用反射执行类的方法 支持参数绑定
      * @access public
