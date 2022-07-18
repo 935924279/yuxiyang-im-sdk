@@ -18,7 +18,7 @@ class Group
     protected $add_group_auth_user_url = '/api/group/addAuthUser';
     protected $delete_group_auth_user_url = '/api/group/deleteAuthUser';
     protected $add_group_tatoo_user_url = '/api/group/createTabooUser';
-    protected $delete_group_tatoo_user_url = 'deleteTabooUser';
+    protected $delete_group_tatoo_user_url = '/api/group/deleteTabooUser';
 
     protected $host;
     protected $appid;
