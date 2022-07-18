@@ -30,17 +30,19 @@
     $host = "http://127.0.0.1:9501"; //请求地址
     $platform =  new AppPlatform($host);
     $appid = 'qlSldg';//平台生成的应用ID
-    
-    //创建应用 createChat
+  
+     //创建应用 createChat
     $from_user = [//发起聊天用户信息
         "uniqueid"=>"935924279",//自己用户的唯一标识
         "username"=>"试试就试试",//名称
-        "avatar"=>""//头像
+        "avatar"=>"",//头像
+        "identity"=>"parent"//两者之间的关系
     ];
     $to_user = [
         "uniqueid"=>"yuxiyang",
         "username"=>"试试就试试",
-        "avatar"=>""
+        "avatar"=>"",
+        "identity"=>"parent"
     ];
     $platform->friend($appid)->createChat($from_user,$to_user);
 
