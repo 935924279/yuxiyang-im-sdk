@@ -29,7 +29,7 @@ class Application
             return $result['token']['token'];
         } else {
             $row = $user->register($email, $password);
-            return $row['body']['token'];
+            return $row['token']['token'];
         }
     }
 
