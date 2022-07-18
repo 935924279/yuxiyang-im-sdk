@@ -24,8 +24,9 @@ class Application
     {
         $user = new User($this->host);
         $result = $user->login($email, $password);
-        if ($result['httpCode'] == 200 && $result['body']['code'] == 0) {
-            return $result['body']['token']['token'];
+
+        if ( $result['code'] == 0) {
+            return $result['token']['token'];
         } else {
             $row = $user->register($email, $password);
             return $row['body']['token'];
@@ -57,7 +58,7 @@ class Application
             "Authorization" => "Bearer " . $this->authorization
         ];
         try {
-            return HttpRequest::post($url, [], $headers);
+            return HttpRequest::get($url, [], $headers);
         } catch (Exception $e) {
             return json_encode(['msg'=>$e->getMessage(),'code'=>$e->getCode()]);
 
