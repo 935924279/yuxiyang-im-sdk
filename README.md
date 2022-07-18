@@ -73,17 +73,17 @@
         "avatar"=>""//头像
     ];
     $group_name = '群名称';
-    $group_name = '群头像';
-    $size = '群人数';
+    $avatar = '群头像';
+    $size = 100;
     $introduction = '群介绍';
     $group_users = [//添加的群成员
-        {
-            "uniqueid":"12343456",
-            "username":"试试就试试",
-            "avatar":""
-        } ...
-    ]
-    $platform->group($appid)->create($from_user,$group_name,$group_name);
+       [
+        "uniqueid"=>"12343456",
+        "username"=>"试试就试试",
+        "avatar"=>""
+        ]
+     ];
+    $platform->group($appid)->create($from_user,$group_name,$avatar,$size,$introduction,$group_users);
     
     //添加群成员 addmember
     $group_id = 1;//群ID

@@ -90,7 +90,7 @@ class Group
     public function sendMessage(int $group_id,string $uniqueid,array $content){
         $params = [
             'group_id'=>$group_id,
-            'niqueid'=>$uniqueid,
+            'uniqueid'=>$uniqueid,
             'content'=>$content
         ];
         $request_url = $this->host.$this->send_message_url;
@@ -109,7 +109,7 @@ class Group
     public function getChatHistory(int $group_id, string $uniqueid, int $page=1, int $size=10){
         $params = [
             'group_id'=>$group_id,
-            'niqueid'=>$uniqueid,
+            'uniqueid'=>$uniqueid,
             'page'=>$page,
             'size'=>$size
         ];
